@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Data: everything under data/ is derived or downloaded, except the small reference tables
+data/*
+!data/reference/
+!data/catalog/
+
+# Never commit these (the original course material contained credentials)
+*.ipynb
+*.pdf
+*.docx
+*.drawio
+.env
+.env.*
+!.env.example
+
+# Web
+web/node_modules/
+web/.svelte-kit/
+web/build/
+web/static/data/
+web/test-results/
+web/playwright-report/
+
+# OS and editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
+configs/local*.toml

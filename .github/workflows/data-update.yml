@@ -74,7 +74,8 @@ jobs:
 
   deploy:
     needs: update
-    if: needs.update.outputs.changed == 'true'
+    # Pages needs a public repository on the free plan.
+    if: needs.update.outputs.changed == 'true' && !github.event.repository.private
     permissions:
       contents: read
       pages: write

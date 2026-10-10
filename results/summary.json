@@ -1,0 +1,134 @@
+{
+  "scenes": {
+    "discovered": 287,
+    "accepted": 163,
+    "first": "2013-04-24",
+    "last": "2026-10-05",
+    "landsat8": 127,
+    "landsat9": 36
+  },
+  "zones": {
+    "primary": "r200",
+    "n": 7544,
+    "with_composite": 7012
+  },
+  "relative_heat": {
+    "p10_k": -5.4111,
+    "p90_k": 4.7366,
+    "greenest_decile_k": -5.5015,
+    "least_green_decile_k": 2.0328,
+    "hottest_planning_areas": [
+      {
+        "name": "Pioneer",
+        "alpha_k": 5.6016
+      },
+      {
+        "name": "Boon Lay",
+        "alpha_k": 3.9925
+      },
+      {
+        "name": "Serangoon",
+        "alpha_k": 2.556
+      }
+    ],
+    "coolest_planning_areas": [
+      {
+        "name": "Central Water Catchment",
+        "alpha_k": -6.3216
+      },
+      {
+        "name": "Simpang",
+        "alpha_k": -5.1839
+      },
+      {
+        "name": "North-Eastern Islands",
+        "alpha_k": -4.7666
+      }
+    ]
+  },
+  "trends": {
+    "zones_tested": 6849,
+    "warming_significant": 596,
+    "cooling_significant": 561
+  },
+  "hdb_join": {
+    "match_rate": 0.9941,
+    "residential_match_rate": 0.9951
+  },
+  "physics": {
+    "reference_scene": "LC08_L2SP_125059_20180524_02_T1",
+    "single_channel_bias_k": -16.9234,
+    "radiative_transfer_rmse_k": 0.128,
+    "transmission": 0.3897
+  },
+  "model": {
+    "n": 5949,
+    "lm_decision": "both",
+    "lowest_aic": "SDM",
+    "period": [
+      "2021-01-01",
+      "2025-12-31"
+    ]
+  },
+  "island_level_c": 38.80870688557627,
+  "median_clear_observations": 80.0,
+  "model_detail": {
+    "grid": "r200",
+    "kind": "SDM",
+    "n": 5949,
+    "fit_label": "pseudo R\u00b2 (reduced form)",
+    "fit": 0.7037928607804576,
+    "residual_moran_i": -0.012266864679074625,
+    "residual_moran_p": 0.1204701660565964,
+    "impacts": {
+      "ndvi": {
+        "direct": -1.9294140633128154,
+        "total": -3.1954040169896425,
+        "direct_se": 0.032241663899313294,
+        "total_se": 0.12457832577933127,
+        "sd": 0.1946409362208473
+      },
+      "water_frac": {
+        "direct": -0.606923573900761,
+        "total": -1.8712749593577878,
+        "direct_se": 0.021255094693061066,
+        "total_se": 0.1520018302102337,
+        "sd": 0.13783334560447458
+      },
+      "pop_density": {
+        "direct": 0.25281171452843254,
+        "total": 0.918891745126625,
+        "direct_se": 0.042283852707373296,
+        "total_se": 0.3259160114158391,
+        "sd": 16.891702099741092
+      },
+      "hdb_far": {
+        "direct": -0.5019177110744887,
+        "total": -1.3699948888147286,
+        "direct_se": 0.04027261057526672,
+        "total_se": 0.40806323161277297,
+        "sd": 0.6329500939645168
+      },
+      "hdb_commercial": {
+        "direct": 0.12012257021192357,
+        "total": 0.4720228445799087,
+        "direct_se": 0.02687773728587458,
+        "total_se": 0.283974191531048,
+        "sd": 0.020377840955541526
+      },
+      "dist_coast_km": {
+        "direct": 0.042593149806204746,
+        "total": 0.22306255218195561,
+        "direct_se": 0.020991915594141618,
+        "total_se": 0.11031588234607351,
+        "sd": 1.7307752378908743
+      }
+    }
+  },
+  "physics_range": {
+    "n_scenes": 6,
+    "single_channel_bias_min_k": -16.923360405190838,
+    "single_channel_bias_max_k": -8.749236565176792,
+    "reference_date": "2018-05-24"
+  }
+}

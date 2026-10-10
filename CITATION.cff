@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software or its derived data, please cite it as below."
+title: "Singapore Urban Heat: surface urban heat from every clear Landsat 8 and 9 scene"
+type: software
+authors:
+  - family-names: Heide
+    given-names: Maurice
+    affiliation: ETH Zurich
+version: 0.1.0 # x-release-please-version
+license: MIT
+repository-code: "https://github.com/mooofna/singapore-urban-heat"
+url: "https://mooofna.github.io/singapore-urban-heat/"
+keywords:
+  - urban heat island
+  - land surface temperature
+  - Landsat
+  - spatial econometrics
+  - Singapore
+references:
+  - type: article
+    title: "Urban Heat Islands: Beating the Heat with Multi-Modal Spatial Analysis"
+    authors:
+      - family-names: Yong
+        given-names: Marcus
+      - family-names: Lim
+        given-names: Kwan Hui
+    year: 2020
+    identifiers:
+      - type: other
+        value: "arXiv:2012.03049"

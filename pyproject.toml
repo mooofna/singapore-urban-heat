@@ -55,6 +55,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/sgheat"]
 
+[tool.hatch.build.targets.sdist]
+include = ["src/sgheat", "tests", "configs", "docs/methodology.md", "README.md", "LICENSE", "DATA_LICENSE.md", "CITATION.cff"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py312"

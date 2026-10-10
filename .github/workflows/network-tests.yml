@@ -1,0 +1,39 @@
+name: Upstream checks
+
+# Weekly check that the external APIs still answer the way the pipeline expects.
+on:
+  schedule:
+    - cron: "41 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.13"
+          enable-cache: true
+      - run: uv sync --locked
+      - name: Network tests
+        id: tests
+        run: uv run pytest -m network -o addopts="" tests/network
+      - name: Open or update an issue on failure
+        if: failure() && steps.tests.conclusion == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Upstream check failed"
+          number=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number')
+          body="An external data source no longer behaves as expected. Run: $RUN_URL"
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body" --label upstream || gh issue create --title "$title" --body "$body"
+          fi

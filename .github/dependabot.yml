@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      geospatial:
+        patterns: ["rasterio", "geopandas", "shapely", "pyproj", "exactextract", "pyogrio"]
+      pysal:
+        patterns: ["libpysal", "spreg", "esda"]
+      dev:
+        dependency-type: development
+  - package-ecosystem: npm
+    directory: /web
+    schedule:
+      interval: weekly
+    groups:
+      svelte:
+        patterns: ["svelte", "svelte-check", "@sveltejs/*", "vite"]
+      testing:
+        patterns: ["vitest", "@playwright/test", "@axe-core/playwright"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

@@ -71,7 +71,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["D", "PLR2004", "S101"]
-"scripts/**" = ["D"]
+"scripts/**" = ["D", "E501"]  # prose templates for release notes and the README
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

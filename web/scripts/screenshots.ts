@@ -33,4 +33,12 @@ await shot('explorer-dark', '/?at=1.3550,103.8200,11.10', { theme: 'dark' });
 await shot('explorer-light', '/?at=1.3550,103.8200,11.10', { theme: 'light' });
 await shot('explorer-trend', '/?layer=trend&at=1.3550,103.8200,11.10', { theme: 'light' });
 await shot('models', '/models', { theme: 'light', height: 1100 });
+await shot('social-preview', '/?at=1.3520,103.8250,10.55', {
+  width: 1280,
+  height: 640,
+  theme: 'dark',
+  prepare: async (page) => {
+    await page.getByRole('button', { name: 'Hide' }).click();
+  }
+});
 await browser.close();

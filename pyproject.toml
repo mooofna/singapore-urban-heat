@@ -1,6 +1,6 @@
 [project]
 name = "sgheat"
-version = "0.1.0"
+version = "1.0.0"
 description = "Surface urban heat in Singapore from every clear Landsat 8 and 9 scene since 2013, with spatial econometrics and a static web explorer."
 readme = "README.md"
 license = "MIT"

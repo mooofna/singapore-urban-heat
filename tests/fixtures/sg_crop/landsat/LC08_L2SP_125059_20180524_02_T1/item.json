@@ -1,0 +1,103 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "LC08_L2SP_125059_20180524_02_T1",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          103.87629146728983,
+          1.3344442069451359
+        ],
+        [
+          103.87626633314214,
+          1.3887172711211364
+        ],
+        [
+          103.82234106445074,
+          1.3886908517552397
+        ],
+        [
+          103.8223674040617,
+          1.3344188204517466
+        ],
+        [
+          103.87629146728983,
+          1.3344442069451359
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    103.82234106445074,
+    1.3344188204517466,
+    103.87629146728983,
+    1.3887172711211364
+  ],
+  "properties": {
+    "datetime": "2018-05-24T03:15:32.026827Z",
+    "platform": "landsat-8",
+    "landsat:wrs_path": "125",
+    "landsat:wrs_row": "059",
+    "landsat:collection_category": "T1",
+    "eo:cloud_cover": 5.68,
+    "landsat:cloud_cover_land": 9.93,
+    "created": "2022-05-06T16:58:02.217941Z",
+    "proj:transform": [
+      30.0,
+      0.0,
+      368985.0,
+      0.0,
+      -30.0,
+      153525.0
+    ]
+  },
+  "assets": {
+    "lwir11": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_ST_B10.TIF",
+      "type": "image/tiff"
+    },
+    "qa_pixel": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff"
+    },
+    "green": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_SR_B3.TIF",
+      "type": "image/tiff"
+    },
+    "red": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_SR_B4.TIF",
+      "type": "image/tiff"
+    },
+    "nir08": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_SR_B5.TIF",
+      "type": "image/tiff"
+    },
+    "swir16": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_SR_B6.TIF",
+      "type": "image/tiff"
+    },
+    "trad": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_ST_TRAD.TIF",
+      "type": "image/tiff"
+    },
+    "urad": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_ST_URAD.TIF",
+      "type": "image/tiff"
+    },
+    "drad": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_ST_DRAD.TIF",
+      "type": "image/tiff"
+    },
+    "atran": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_ST_ATRAN.TIF",
+      "type": "image/tiff"
+    },
+    "emis": {
+      "href": "./LC08_L2SP_125059_20180524_20200901_02_T1_ST_EMIS.TIF",
+      "type": "image/tiff"
+    }
+  },
+  "links": []
+}

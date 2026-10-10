@@ -36,6 +36,12 @@ repos:
         entry: uv run python scripts/check_style.py
         language: system
         types: [text]
+      - id: prettier-web
+        name: prettier (web)
+        entry: bash -c 'cd web && npx prettier --write --ignore-unknown "${@#web/}"' --
+        language: system
+        files: '^web/'
+        exclude: '^web/(static/data|package-lock.json)'
       - id: mypy
         name: mypy (strict)
         entry: uv run mypy

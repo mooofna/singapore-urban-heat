@@ -16,7 +16,11 @@ const browser = await chromium.launch();
 
 async function shot(name: string, path: string, opts: Shot = {}): Promise<void> {
   const { width = 1440, height = 860, theme = 'dark', wait = 4000, prepare } = opts;
-  const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 2, colorScheme: theme });
+  const page = await browser.newPage({
+    viewport: { width, height },
+    deviceScaleFactor: 2,
+    colorScheme: theme
+  });
   await page.goto(`${base}${path}`);
   await page.waitForLoadState('networkidle');
   if (prepare) await prepare(page);

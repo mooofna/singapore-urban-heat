@@ -47,7 +47,8 @@
     [103.6, 1.205],
     [104.09, 1.475]
   ];
-  const NO_DATA = 'rgba(128, 128, 128, 0.12)';
+  // Zones without a value (open water, too few clear scenes) stay transparent over the basemap.
+  const NO_DATA = 'rgba(0, 0, 0, 0)';
 
   let container: HTMLDivElement;
   let map: MapLibreMap | null = null;

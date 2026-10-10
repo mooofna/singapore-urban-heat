@@ -34,6 +34,7 @@
     </div>
     {#if layer.unit}<div class="unit muted">{layer.unit}</div>{/if}
   {/if}
+  <div class="unit muted">Uncoloured: open water or too few clear observations.</div>
 </div>
 
 <style>

@@ -1,0 +1,45 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=800"]
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.0
+    hooks:
+      - id: ruff-check
+        args: ["--fix"]
+      - id: ruff-format
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      - id: gitleaks
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.13.0
+    hooks:
+      - id: uv-lock
+  - repo: local
+    hooks:
+      - id: forbidden-file-types
+        name: forbid notebooks, PDFs and Word files
+        entry: "notebooks, PDFs and Word files must not be committed (see SECURITY.md)"
+        language: fail
+        files: '\.(ipynb|pdf|docx|drawio)$'
+      - id: style-check
+        name: house style (no em dash, en dash or middle dot in prose)
+        entry: uv run python scripts/check_style.py
+        language: system
+        types: [text]
+      - id: mypy
+        name: mypy (strict)
+        entry: uv run mypy
+        language: system
+        types: [python]
+        files: '^src/'
+        pass_filenames: false

@@ -6,7 +6,7 @@ Layout below ``web/static/data``::
     catalog.json                  every discovered scene with status and quality
     summary.json                  headline numbers (also rendered into the README)
     physics.json                  textbook LST estimators against USGS surface temperature
-    zones/<set>.geojson           zone geometries (WGS84), feature index ``i``
+    zones/<set>.geo.json          zone geometries (GeoJSON, WGS84), feature index ``i``
     zones/<set>.json              per-zone columns aligned to ``i``
     scenes/<set>/<item>.bin       per-scene int16 arrays: anomaly and LST (0.01 K units)
     series/<set>/<chunk>.bin      int16 anomaly time series, ``CHUNK`` zones per file
@@ -111,7 +111,8 @@ def export_zone_set(ctx: RunContext, name: str, kind: str, out: Path) -> dict[st
     """Geometry, per-zone columns and model residuals of one zone set."""
     zones = load_zones(ctx, name)
     geo = zone_geometries(zones, kind)
-    geo_path = out / "zones" / f"{name}.geojson"
+    # .json rather than .geojson: static hosts compress application/json reliably.
+    geo_path = out / "zones" / f"{name}.geo.json"
     geo_path.parent.mkdir(parents=True, exist_ok=True)
     geo_path.write_text(
         geo.to_json(drop_id=True, to_wgs84=False, na="null", show_bbox=False).replace(" ", "")
@@ -165,9 +166,11 @@ def export_scenes(ctx: RunContext, name: str, out: Path) -> list[str]:
     zones = load_zones(ctx, name)
     ids = zones["zone_id"].astype(str).tolist()
     anomalies = pd.read_parquet(ctx.paths.out / f"anomalies_{name}.parquet")
-    wide = anomalies.pivot(index="zone_id", columns="item_id", values="anomaly_k").reindex(
-        index=ids
-    )
+    catalog = load_catalog(ctx).sort_values("datetime_utc")
+    present = set(anomalies["item_id"])
+    chronological = [i for i in catalog["item_id"] if i in present]
+    wide = anomalies.pivot(index="zone_id", columns="item_id", values="anomaly_k")
+    wide = wide.reindex(index=ids, columns=chronological)
     stats = pd.read_parquet(ctx.paths.scene_zone_stats)
     stats = stats[stats["zone_set"] == name]
     lst = (

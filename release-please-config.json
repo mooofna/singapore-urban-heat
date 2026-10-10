@@ -6,7 +6,10 @@
       "package-name": "sgheat",
       "changelog-path": "CHANGELOG.md",
       "include-v-in-tag": true,
-      "extra-files": ["CITATION.cff"]
+      "extra-files": [
+        "CITATION.cff"
+      ],
+      "include-component-in-tag": false
     }
   }
 }

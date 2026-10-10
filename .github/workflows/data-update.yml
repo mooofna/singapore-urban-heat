@@ -24,7 +24,7 @@ jobs:
       changed: ${{ steps.update.outputs.changed }}
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           python-version: "3.13"
           enable-cache: true

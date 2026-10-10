@@ -97,7 +97,7 @@ def main() -> None:
         f"* {scenes['accepted']} usable Landsat scenes of {scenes['discovered']} discovered, "
         f"{scenes['first']} to {scenes['last']}.",
         f"* New usable scenes in this update: {len(new)}"
-        + (f" ({', '.join(new)})." if new else "."),
+        + (f" ({', '.join(new)})." if 0 < len(new) <= 10 else "."),
         f"* Pipeline version {package_version()}, commit {sha or 'unknown'}.",
         "",
         "`scenes.tar.gz` holds the per-scene zone statistics that the next monthly update builds on; "

@@ -16,7 +16,6 @@ build/
 # Data: everything under data/ is derived or downloaded, except the small reference tables
 data/*
 !data/reference/
-!data/catalog/
 
 # Never commit these (the original course material contained credentials)
 *.ipynb

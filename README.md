@@ -69,7 +69,7 @@ uv sync
 uv run sgheat run                      # everything below, about 10 minutes on a laptop
 uv run sgheat fetch                    # data.gov.sg and WorldPop downloads with provenance
 uv run sgheat boundaries && uv run sgheat buildings && uv run sgheat grid
-uv run sgheat scenes discover          # STAC search, catalog in data/catalog/scenes.csv
+uv run sgheat scenes discover          # STAC search, scene catalog in data/catalog/scenes.csv
 uv run sgheat scenes process           # cloud screening and zone statistics per scene
 uv run sgheat temporal                 # median polish, composites, trends, LISA
 uv run sgheat features && uv run sgheat model
@@ -110,7 +110,6 @@ tests/            unit, integration (offline end-to-end), network (upstream cont
 web/              SvelteKit app: explorer, areas, models, methods, data
 docs/             methodology
 configs/          default configuration
-data/catalog/     scene catalog, updated by the monthly workflow
 data/reference/   HDB street code bridge
 results/          frozen headline numbers behind this README
 ```

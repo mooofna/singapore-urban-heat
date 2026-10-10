@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 300
     permissions:
+      actions: write
       contents: write
     outputs:
       changed: ${{ steps.update.outputs.changed }}
@@ -37,20 +38,18 @@ jobs:
           uv run sgheat boundaries
           uv run sgheat buildings
           uv run sgheat grid
-      - name: Restore statistics of earlier scenes
+      - name: Restore the catalog and statistics of earlier scenes
         if: ${{ !inputs.full_rebuild }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          mkdir -p data/scenes
-          if gh release download data-latest --pattern scenes.tar.gz --dir /tmp; then
-            tar -xzf /tmp/scenes.tar.gz -C data
+          mkdir -p data/scenes data/catalog
+          if gh release download data-latest --pattern scenes.tar.gz --pattern scenes.csv --dir /tmp/prev; then
+            tar -xzf /tmp/prev/scenes.tar.gz -C data
+            cp /tmp/prev/scenes.csv data/catalog/scenes.csv
           else
             echo "No earlier data release; all scenes will be processed."
           fi
-      - name: Start from an empty catalog
-        if: ${{ inputs.full_rebuild }}
-        run: rm -f data/catalog/scenes.csv
       - name: Discover and process new scenes, rerun the analysis
         id: update
         run: uv run sgheat update --workers 6
@@ -62,15 +61,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash scripts/publish_data_release.sh dist-data
-      - name: Commit the scene catalog
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/catalog/scenes.csv
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(data): update scene catalog [skip ci]"
-            git push
-          fi
+      # GitHub disables scheduled workflows after 60 days without repository activity.
+      # Re-enabling through the API resets that timer without committing anything.
+      - name: Keep the schedule alive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/data-update.yml/enable"
 
   deploy:
     needs: update

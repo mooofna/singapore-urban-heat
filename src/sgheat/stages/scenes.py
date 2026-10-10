@@ -1,6 +1,7 @@
 """Landsat scenes: discovery, screening and per-zone statistics.
 
-Every scene found on the STAC API is recorded in ``data/catalog/scenes.csv``
+Every scene found on the STAC API is recorded in ``data/catalog/scenes.csv`` (published
+with each data release)
 with a status: ``pending`` (not yet processed), ``accepted`` (zone statistics
 written), ``rejected`` (too cloudy over Singapore, with the measured clear
 fraction) or ``failed`` (network or data error, retried on the next run). An

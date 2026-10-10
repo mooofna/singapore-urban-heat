@@ -24,7 +24,9 @@ test('explorer renders the map and switches layers', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /ground runs hot/i })).toBeVisible();
   await expect(page.locator('.maplibregl-canvas')).toBeVisible();
-  await expect(page.getByText(/clear Landsat 8 and 9 scenes/)).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Map controls' })).toContainText(
+    /clear\s+Landsat\s+8\s+and\s+9\s+scenes/
+  );
   await page.getByRole('combobox', { name: 'Layer' }).selectOption('ndvi');
   await expect(page.getByText('Median NDVI of clear land pixels')).toBeVisible();
   await expect(page).toHaveURL(/layer=ndvi/);

@@ -1,0 +1,82 @@
+name: Monthly data update
+
+on:
+  schedule:
+    - cron: "23 2 7 * *"  # 02:23 UTC on the 7th of every month
+  workflow_dispatch:
+    inputs:
+      full_rebuild:
+        description: Reprocess every scene instead of restoring earlier statistics
+        type: boolean
+        default: false
+
+concurrency:
+  group: data-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.update.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.13"
+          enable-cache: true
+      - run: uv sync --locked
+      - name: Static inputs and zone sets
+        env:
+          DATAGOVSG_API_KEY: ${{ secrets.DATAGOVSG_API_KEY }}
+        run: |
+          uv run sgheat fetch
+          uv run sgheat boundaries
+          uv run sgheat buildings
+          uv run sgheat grid
+      - name: Restore statistics of earlier scenes
+        if: ${{ !inputs.full_rebuild }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/scenes
+          if gh release download data-latest --pattern scenes.tar.gz --dir /tmp; then
+            tar -xzf /tmp/scenes.tar.gz -C data
+          else
+            echo "No earlier data release; all scenes will be processed."
+          fi
+      - name: Start from an empty catalog
+        if: ${{ inputs.full_rebuild }}
+        run: rm -f data/catalog/scenes.csv
+      - name: Discover and process new scenes, rerun the analysis
+        id: update
+        run: uv run sgheat update --workers 6
+      - name: Package the data release
+        if: steps.update.outputs.changed == 'true'
+        run: uv run python scripts/package_release.py --out dist-data
+      - name: Publish the data release
+        if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/publish_data_release.sh dist-data
+      - name: Commit the scene catalog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/scenes.csv
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(data): update scene catalog [skip ci]"
+            git push
+          fi
+
+  deploy:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/pages.yml

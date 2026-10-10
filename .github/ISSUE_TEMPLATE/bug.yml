@@ -1,0 +1,21 @@
+name: Bug report
+description: Something in the pipeline or the website does not work as described
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what you saw instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: Commands, config or a link to the view on the website.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `uv run python -c "import sgheat, importlib.metadata as m; print(m.version('sgheat'))"` or the date on the Data page.

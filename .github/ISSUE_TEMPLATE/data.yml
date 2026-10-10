@@ -1,0 +1,16 @@
+name: Data question or issue
+description: A number, map or scene looks wrong, or an upstream dataset changed
+labels: [data]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What looks wrong
+      description: Zone, scene id or planning area, and why you think it is wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Links, screenshots or other data that show the problem.

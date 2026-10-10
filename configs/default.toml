@@ -1,0 +1,31 @@
+# Default configuration. Every value shown is also the built-in default; edit a copy
+# and pass it with `sgheat <stage> --config path/to/file.toml`.
+
+[paths]
+data_dir = "data"
+web_data_dir = "web/static/data"
+
+[grid]
+radii_m = [200, 300, 400, 600]
+primary_radius_m = 200
+min_land_frac = 0.5
+
+[scenes]
+platforms = ["landsat-8", "landsat-9"]
+wrs_path = "125"
+wrs_row = "059"
+collection_category = "T1"
+start = 2013-04-11
+max_cloud_cover_land = 80.0
+min_scene_clear_frac = 0.3
+min_zone_clear_frac = 0.7
+min_zone_pixels = 10.0
+
+[model]
+period_start = 2021-01-01
+period_end = 2025-12-31
+worldpop_year = 2023
+hdb_completed_by = 2020
+
+[worldpop]
+years = [2023]

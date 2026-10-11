@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/mooofna/singapore-urban-heat/compare/v1.0.0...v1.1.0) (2026-10-11)
+
+
+### Features
+
+* **web:** link the header and About page to the author's homepage ([#4](https://github.com/mooofna/singapore-urban-heat/issues/4)) ([6b1d7b3](https://github.com/mooofna/singapore-urban-heat/commit/6b1d7b34e036adaea73e71a11bd1d28c78717bbb))
+
 ## [1.0.0](https://github.com/mooofna/singapore-urban-heat/compare/v0.1.0...v1.0.0) (2026-10-10)
 
 

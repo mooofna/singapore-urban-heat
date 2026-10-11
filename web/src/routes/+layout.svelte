@@ -43,6 +43,7 @@
     {/each}
   </nav>
   <div class="tools">
+    <a class="author" href="https://mooofna.github.io/">Maurice Heide</a>
     <a
       class="gh"
       href="https://github.com/mooofna/singapore-urban-heat"
@@ -120,6 +121,19 @@
     gap: 8px;
   }
 
+  .author {
+    padding: 6px 8px;
+    border-radius: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .author:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+
   .gh {
     display: inline-grid;
     place-items: center;
@@ -138,6 +152,13 @@
     }
     header {
       gap: 8px;
+    }
+  }
+
+  /* On phones the author link lives on the About page only. */
+  @media (max-width: 560px) {
+    .author {
+      display: none;
     }
   }
 </style>

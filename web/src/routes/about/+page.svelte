@@ -51,6 +51,7 @@
   <h2>Author</h2>
   <p>
     Maurice Heide, MSc student in Data Science at ETH Zurich.
+    <a href="https://mooofna.github.io/">Homepage</a>,
     <a href="https://github.com/mooofna">GitHub</a>,
     <a href="https://www.linkedin.com/in/maurice-heide">LinkedIn</a>,
     <a href="https://scholar.google.com/citations?user=x6GTx8kAAAAJ">Google Scholar</a>.
